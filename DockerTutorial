@@ -1,0 +1,128 @@
+Containerization vs Virtual Machine   
+Works on the process layer of an OS and not on VM level, this means each container requires much less space, ram and processor to run.  Container is 100 times lesser than vm when compared to space utilisation
+Why should we use docker ?
+One developer gives a project to another developer - even after installing all dependencies, the project doesn't work properly. 
+One developer makes a project live on a server - it works on his machine but not on server - this problem can be solved as well with docker.
+Code works fine on QA, dev server but not on prod server - this problem can be solved as well with docker.
+ What is Docker?
+Docker is a containerization platform that provides an easy way to containerize your applications  which means using docker you can build container images(necessary components of their application such as code libraries and system tools), run the images to create containers and also push to registries such as Dockerhub.
+Docker is an App Platform for developing,shipping and running applications.
+It is a platform which packs an application and all its dependencies together in the form of containers.
+Maintains integrity of application environment
+It Saves hundreds of hours of developers time so they can focus only on building application
+This image can be distributed to other developers,testers, or deployed on different servers without any compatibility issues.
+Docker Architecture
+
+Docker daemon is the heart of dkr. As a user we use dkr cli to run cmd’s which mean received by dkr daemon ensures to (executes the cmd’s) creates dkr images and containers. Using the dkr daemon itself we can push them to the dkr registry.
+If daemon goes down technically dkr stops functioning. containers will stop working dkr daemon is the one listening to container’s. 
+Docker Life Cycle
+Below Image is reference to understand the lifecycle of Docker. There are 3 important things.
+docker build - -> builds docker images from Dockerfile
+docker run - -> runs container from docker images
+docker push - -> push the container image to public/private registries to share the docker images.
+
+What is a Docker File ?
+It is a set of instructions to build an image .
+It is a text doc which contains all cmd’s that a user can call on the cmd line to assemble an image.
+As a user we will write the dkr file we will tell the dkr daemon get me a base image inside that this my source code put the source code once done run the specific cmd’s related to application libraries and dependencies to be installed inside the dkr image 
+Using the dkr cli to submit the dkr file to dkr daemon using the dkr build cmd it creates a dkr image(nothing but a snapshot). Once an image is created dkr daemon executes the dkr run cmd to create a container. 
+FROM: Specifies the base image to use for the docker image.
+RUN: runs a cmd inside the docker container during the build process.
+COPY: copies files from local system to Docker image.
+WORKDIR: sets the working directory for subsequent commands in docker file 
+CMD: specifies the command to run when the docker container starts.
+
+Dockerfile
+Dockerfile is a file where you provide the steps to build your Docker Image.
+Docker daemon (itself called service in linux)
+The Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.
+Docker client
+The Docker client (docker) is the primary way that many Docker users interact with Docker. When you use commands such as docker run, the client sends these commands to dockerd, which carries them out. The docker command uses the Docker API. The Docker client can communicate with more than one daemon.
+Docker Desktop
+Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (dockerd), the Docker client (docker), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see Docker Desktop.
+Docker registries
+A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker is configured to look for images on Docker Hub by default. You can even run your own private registry.
+OAOAOAOAWhen you use the docker pull or docker run commands, the required images are pulled from your configured registry. When you use the docker push command, your image is pushed to your configured registry. Docker objects
+OAOAOAWhen you use Docker, you are creating and using images, containers, networks, volumes, plugins, and other objects. This section is a brief overview of some of those objects.
+Docker Images
+OAOAOAOAAn image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization. For example, you may build an image which is based on the ubuntu image, but install the Apache web server and your application, as well as the configuration details needed to make your application run.
+OAOAOAOAYou might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a Dockerfile with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
+OAOA
+OAIt is created from a docker file.
+It’s just a template to create a docker container.
+Images are stored in docker hub & from there we can easily share images with other developers.
+Think of this as the plan of a building. We can draw on paper that the plan of a building will have these many things and from this the building is actually built. The building is the container.
+OAWhat is Docker Engine ?
+OAManaging the containers	
+What is docker hub?
+It is a place which contains all of the images in one place. You can get access to multiple images that you can use or publish your private images for your friends to use. Think of this as github.
+What are Docker containers?
+Containers contain applications. Either the entire application can be present in one container or you can have different containers for different applications. So, you can put your nodejs server in one container, mongodb in another and reactjs in different containers and then link them together. Or you can just make one big ubuntu container and install the entire project in it and launch that as well. It is usually good to have different containers for different layers because we can increase or decrease particular containers based on traffic and load.  
+
+Docker container contains base image system dependencies + app libraries and required softwares.
+A beauty of containe ris if they are not running they will allow other container to use there resources and host os so we can run n no of contianes.
+Comign to vm container cant use another vm resources that is drawback in container.
+ 
+EVERY DOCKER CONTAINER HAS ITS OWN IP ADDRESS AND PORTS that are exposed.
+Docker Installation
+Windows
+	
+Double-click Docker Desktop Installer.exe to run the installer.
+When prompted, ensure the Use WSL 2 instead of Hyper-V option on the Configuration page is selected or not depending on your choice of backend.
+If your system only supports one of the two options, you will not be able to select which backend to use.
+Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+When the installation is successful, select Close to complete the installation process.
+If your admin account is different to your user account, you must add the user to the docker-users group. Run Computer Management as an administrator and navigate to Local Users and Groups > Groups > docker-users. Right-click to add the user to the group. Sign out and sign back in for the changes to take effect.
+Install from the command line
+After downloading Docker Desktop Installer.exe, run the following command in a terminal to install Docker Desktop:
+$ "Docker Desktop Installer.exe" install
+If you’re using PowerShell you should run it as:
+Start-Process 'Docker Desktop Installer.exe'-Wait install
+If using the Windows Command Prompt:
+start /w "" "Docker Desktop Installer.exe" install
+	## wsl - -install
+	## wsl - - update
+WSL - - > Windows subsystem for linux
+Before working on docker after installation restart pc to work without any issues.
+
+Linux
+Install the required packages to enable Docker's repository management:
+## sudo yum install -y yum-utils device-mapper-persistent-data lvm2 
+Add the Docker repository to the package manager by running
+	## sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install -y docker-ce
+ This command install the latest stable version of Docker.
+Start the Docker service:
+sudo systemctl start docker
+Enable Docker to start on system boot:
+sudo systemctl enable docker
+Add your user to the docker group to run Docker commands without using sudo usermod -aG docker $USER  Replace $USER with your username.
+Log out of the server and log back in to apply the group membership changes.
+Verify that Docker is installed correctly by running the following command:
+docker version
+# docker run busybox echo hello  - - > it will try to fetch the image locally if not it will pull the latest image from docker hub
+
+Docker Image Commands:-
+	## docker -v			- - > To check version of docker
+## docker pull image_name	- - > To pull the image
+	## docker run image_name	- - > To create & start a container
+## docker images		- - > list of images, ID,Size,creation date,tag
+	## docker rmi image_name  	- - > To remove image
+
+Docker Container Commands : -
+## docker ps			- - > currently running containers in real time
+     Name, status(running,stopped,etc.,) & Ports mapping 
+	## docker ps -a		- - > list all containers
+	## docker ps -aq		- - > list all container ID’s
+	## docker ps -as		- - > list size of all container’s	
+	## docker rm container_name	- - > To remove a container
+## docker rm contianer_id	- - > To remove container
+	## docker run -it python	- - > 
+	## docker run -it ubuntu bash - - >
+
+When you execute the docker run -it ubuntu bash command, Docker pulls the Ubuntu image from the Docker Hub registry (if it's not already available locally), creates a new container based on that image, and starts an interactive bash session inside the container. You can then interact with the Ubuntu environment within the container as if it were a standalone Ubuntu system.
+
+ubuntu is the name of the Docker image you want to run the container. In this case, it's the official Ubuntu image available on Docker Hub.
+
+bash is the command to run inside the container. It starts an interactive bash shell session.
+
